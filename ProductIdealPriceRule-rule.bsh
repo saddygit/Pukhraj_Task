@@ -1,0 +1,22 @@
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.math.RoundingMode;
+import java.util.*;
+if(priceList == null || priceList.isEmpty()){
+    return BigDecimal.ZERO;
+}
+BigDecimal sum = BigDecimal.ZERO;
+int divisorNumber;
+if(priceList.size() <= 4){
+    return idealPriceRule.calculateAveragePrice(priceList);
+}else{
+     Collections.sort(priceList);
+     priceList.remove(0);
+     priceList.remove(0);
+     priceList.remove(priceList.size()-1);
+     priceList.remove(priceList.size()-1);
+     sum = idealPriceRule.calculateTotalPrice(priceList);
+     divisorNumber = priceList.size();
+}
+BigDecimal idealPrice = sum.divide(new BigDecimal(divisorNumber), 2, RoundingMode.HALF_UP);
+return idealPrice.setScale(2, RoundingMode.HALF_UP);
